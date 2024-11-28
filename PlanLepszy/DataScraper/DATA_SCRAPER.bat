@@ -1,2 +1,1 @@
-
-php data_scraper.php;
+php .\data_scraper.php;
