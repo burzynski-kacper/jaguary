@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan ZUT 2024{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header>
+            <img src="/images/logo-zut.png" alt="Zachodniopomorski Uniwersytet Technologiczny w Szczecinie" />
+        </header>
+
+        <h1>Plan ZUT 2024</h1>
+
+        <div class="row">
+            <!-- Lewa kolumna -->
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <label for="teacher">Wykładowca</label>
+                        <input type="text" id="teacher" class="form-control" placeholder="Podaj nazwisko">
+                    </div>
+                    <div class="form-group">
+                        <label for="room">Sala</label>
+                        <input type="text" id="room" class="form-control" placeholder="Podaj salę">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Przedmiot</label>
+                        <input type="text" id="subject" class="form-control" placeholder="Podaj przedmiot">
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Grupa</label>
+                        <input type="text" id="group" class="form-control" placeholder="Podaj grupę">
+                    </div>
+                    <div class="form-group">
+                        <label for="album">Numer albumu</label>
+                        <input type="text" id="album" class="form-control" placeholder="Podaj numer albumu">
+                    </div>
+
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                    <button type="reset" class="btn btn-secondary">Wyczyść filtry</button>
+                </form>
+            </div>
+
+            <!-- Prawa kolumna -->
+            <div class="col-md-8">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <button class="btn btn-secondary">❮</button>
+                    <span>Dzisiaj</span>
+                    <button class="btn btn-secondary">❯</button>
+                </div>
+
+                <h2>9 – 15 gru 2024</h2>
+
+                <div class="btn-group mb-3">
+                    <button class="btn btn-secondary">Plan dnia</button>
+                    <button class="btn btn-secondary">Dzień</button>
+                    <button class="btn btn-secondary">Tydzień</button>
+                    <button class="btn btn-secondary">Miesiąc</button>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>pon. 9.12</th>
+                        <th>wt. 10.12</th>
+                        <th>śr. 11.12</th>
+                        <th>czw. 12.12</th>
+                        <th>pt. 13.12</th>
+                        <th>sob. 14.12</th>
+                        <th>niedz. 15.12</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for hour in range(7, 18) %}
+                        <tr>
+                            {% for day in 1..7 %}
+                                <td></td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
