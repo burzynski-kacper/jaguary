@@ -1,85 +1,124 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plan ZUT 2024{% endblock %}
+{% block title %}Plan Dzień{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <header>
-            <img src="/images/logo-zut.png" alt="Zachodniopomorski Uniwersytet Technologiczny w Szczecinie" />
-        </header>
-
-        <h1>Plan ZUT 2024</h1>
+    <div class="container-fluid p-4">
+        <!-- Nawigacja nad sekcją główną -->
+        <div class="row mb-4">
+            <div class="col text-center">
+                <div class="btn-group" role="group" aria-label="Nawigacja">
+                    <button type="button" class="btn btn-outline-primary">Dzień</button>
+                    <button type="button" class="btn btn-outline-primary">Tydzień</button>
+                    <button type="button" class="btn btn-outline-primary">Miesiąc</button>
+                    <button type="button" class="btn btn-outline-primary">Semestr</button>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
-            <!-- Lewa kolumna -->
-            <div class="col-md-4">
-                <form>
-                    <div class="form-group">
-                        <label for="teacher">Wykładowca</label>
-                        <input type="text" id="teacher" class="form-control" placeholder="Podaj nazwisko">
-                    </div>
-                    <div class="form-group">
-                        <label for="room">Sala</label>
-                        <input type="text" id="room" class="form-control" placeholder="Podaj salę">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Przedmiot</label>
-                        <input type="text" id="subject" class="form-control" placeholder="Podaj przedmiot">
-                    </div>
-                    <div class="form-group">
-                        <label for="group">Grupa</label>
-                        <input type="text" id="group" class="form-control" placeholder="Podaj grupę">
-                    </div>
-                    <div class="form-group">
-                        <label for="album">Numer albumu</label>
-                        <input type="text" id="album" class="form-control" placeholder="Podaj numer albumu">
-                    </div>
-
-                    <br/>
-                    <button type="submit" class="btn btn-primary">Szukaj</button>
-                    <button type="reset" class="btn btn-secondary">Wyczyść filtry</button>
-                </form>
+            <!-- Lewa kolumna z filtrami -->
+            <div class="col-md-3 bg-light rounded shadow-sm p-3">
+                <h5 class="text-primary">Filtry</h5>
+                <button class="btn btn-outline-secondary w-100 mb-2">Przykładowy filtr</button>
+                <button class="btn btn-outline-secondary w-100 mb-2">Przykładowy filtr</button>
+                <button class="btn btn-outline-secondary w-100 mb-2">Przykładowy filtr</button>
+                <button class="btn btn-outline-secondary w-100 mb-2">Przykładowy filtr</button>
+                <div class="d-flex mt-3">
+                    <button class="btn btn-primary flex-grow-1">Filtruj</button>
+                    <button class="btn btn-light ms-2">Reset</button>
+                </div>
             </div>
 
-            <!-- Prawa kolumna -->
-            <div class="col-md-8">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <button class="btn btn-secondary">❮</button>
-                    <span>Dzisiaj</span>
-                    <button class="btn btn-secondary">❯</button>
-                </div>
-
-                <h2>9 – 15 gru 2024</h2>
-
-                <div class="btn-group mb-3">
-                    <button class="btn btn-secondary">Plan dnia</button>
-                    <button class="btn btn-secondary">Dzień</button>
-                    <button class="btn btn-secondary">Tydzień</button>
-                    <button class="btn btn-secondary">Miesiąc</button>
-                </div>
-
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>pon. 9.12</th>
-                        <th>wt. 10.12</th>
-                        <th>śr. 11.12</th>
-                        <th>czw. 12.12</th>
-                        <th>pt. 13.12</th>
-                        <th>sob. 14.12</th>
-                        <th>niedz. 15.12</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for hour in range(7, 18) %}
+            <!-- Główna sekcja -->
+            <div class="col-md-9">
+                <div class="table-responsive">
+                    <table class="table align-middle table-bordered text-center rounded shadow-sm">
+                        <thead class="bg-light text-dark">
                         <tr>
-                            {% for day in 1..7 %}
-                                <td></td>
-                            {% endfor %}
+                            <th class="p-3">Godziny</th>
+                            <th>Poniedziałek</th>
+                            <th>Wtorek</th>
+                            <th>Środa</th>
+                            <th>Czwartek</th>
+                            <th>Piątek</th>
+                            <th>Sobota</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">8:15 - 10:00</th>
+                            <td></td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">10:15 - 12:00</th>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-warning text-dark rounded">Wykład</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">12:15 - 14:00</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-info text-white rounded">Audytorium</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">14:15 - 16:00</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="py-3 bg-light text-dark">16:15 - 18:00</th>
+                            <td class="bg-danger text-white rounded">Seminarium</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dolny pasek legendy -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                    <div class="d-flex align-items-center me-3">
+                        <div class="rounded bg-success" style="width: 20px; height: 20px;"></div>
+                        <span class="ms-2">Laboratoria</span>
+                    </div>
+                    <div class="d-flex align-items-center me-3">
+                        <div class="rounded bg-warning" style="width: 20px; height: 20px;"></div>
+                        <span class="ms-2">Wykłady</span>
+                    </div>
+                    <div class="d-flex align-items-center me-3">
+                        <div class="rounded bg-info" style="width: 20px; height: 20px;"></div>
+                        <span class="ms-2">Audytoria</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="rounded bg-danger" style="width: 20px; height: 20px;"></div>
+                        <span class="ms-2">Seminaria</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
