@@ -11,7 +11,7 @@
                     <button type="button" id="view-day" class="btn btn-outline-primary">Dzień</button>
                     <button type="button" id="view-week" class="btn btn-outline-primary">Tydzień</button>
                     <button type="button" id="view-month" class="btn btn-outline-primary">Miesiąc</button>
-                    <button type="button" id="view-term" class="btn btn-outline-primary">Semestr</button>
+                    <button type="button" id="view-semester" class="btn btn-outline-primary">Semestr</button>
                 </div>
             </div>
         </div>
@@ -31,8 +31,41 @@
             </div>
 
             <!-- Główna sekcja -->
-            <div class="col-md-9">
-                <div class="table-responsive">
+            <div id="view-container" class="col-md-9">
+                <div id="day-view" class="view-content">
+                    <table class="table align-middle table-bordered text-center rounded shadow-sm">
+                        <thead class="bg-light text-dark">
+                        <tr>
+                            <th class="p-3">Godziny</th>
+                            <th>Zajęcia</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">8:15 - 10:00</th>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">10:15 - 12:00</th>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">12:15 - 14:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">14:15 - 16:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">16:15 - 18:00</th>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="week-view" class="view-content d-none">
                     <table class="table align-middle table-bordered text-center rounded shadow-sm">
                         <thead class="bg-light text-dark">
                         <tr>
@@ -43,6 +76,7 @@
                             <th>Czwartek</th>
                             <th>Piątek</th>
                             <th>Sobota</th>
+                            <th>Niedziela</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,7 +84,18 @@
                             <th class="p-3 bg-light text-dark">8:15 - 10:00</th>
                             <td></td>
                             <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
                             <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="p-3 bg-light text-dark">10:15 - 12:00</th>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-info text-white rounded">Audytoria</td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -58,33 +103,37 @@
                         <tr>
                             <th class="p-3 bg-light text-dark">10:15 - 12:00</th>
                             <td></td>
-                            <td></td>
-                            <td class="bg-warning text-dark rounded">Wykład</td>
-                            <td></td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <th class="p-3 bg-light text-dark">12:15 - 14:00</th>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
                             <td></td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                            <td class="bg-info text-white rounded">Audytoria</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="bg-info text-white rounded">Audytorium</td>
                             <td></td>
                         </tr>
                         <tr>
                             <th class="p-3 bg-light text-dark">14:15 - 16:00</th>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
+                            <td class="bg-warning text-white rounded">Wykład</td>
+                            <td class="bg-success text-white rounded">Laboratorium</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <th class="py-3 bg-light text-dark">16:15 - 18:00</th>
-                            <td class="bg-danger text-white rounded">Seminarium</td>
+                            <th class="p-3 bg-light text-dark">16:15 - 18:00</th>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -92,8 +141,57 @@
                             <td></td>
                         </tr>
                         </tbody>
-
                     </table>
+                </div>
+
+                <div id="month-view" class="view-content d-none">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-bordered text-center rounded shadow-sm">
+                            <thead class="bg-light text-dark">
+                            <tr>
+                                <th>Godziny</th>
+                                {% for day in 1..31 %}
+                                    <th>Dzień {{ day }}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for day in 1..7 %}
+                                    <tr>
+                                        <th class="p-3 bg-light text-dark">8:15 - 10:00</th>
+                                    {% for day2 in 1..31 %}
+                                        <td></td>
+                                    {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="semester-view" class="view-content d-none">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-bordered text-center rounded shadow-sm">
+                            <thead class="bg-light text-dark">
+                            <tr>
+                                <th>Godziny</th>
+                                {% for day in 1..150 %}
+                                    <th>Dzień {{ day }}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for day in 1..7 %}
+                                <tr>
+                                    <th class="p-3 bg-light text-dark">8:15 - 10:00</th>
+                                    {% for day2 in 1..150 %}
+                                        <td></td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,4 +220,23 @@
             </div>
         </div>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.btn-group .btn');
+        const views = document.querySelectorAll('.view-content');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Usuwamy klasę "active" z wszystkich przycisków
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Zmiana widoku
+                views.forEach(view => view.classList.add('d-none'));
+                const targetView = this.id.replace('view-', '') + '-view';
+                document.getElementById(targetView).classList.remove('d-none');
+            });
+        });
+    });
+</script>
 {% endblock %}
