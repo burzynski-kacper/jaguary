@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Lesson;
 use App\Entity\Subject;
+use App\Repository\SubjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -20,7 +21,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ScrapeSubjectCommand extends Command
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager, private readonly SubjectRepository $subjectRepository
     )
     {
         parent::__construct();
@@ -35,29 +36,21 @@ class ScrapeSubjectCommand extends Command
         $url = 'https://plan.zut.edu.pl/schedule.php?kind=subject&query=+';
         $response = file_get_contents($url);
         $json = json_decode($response);
+        $cnt = 0;
         foreach($json as $obj){
-            $subject = new Subject();
-            $this->entityManager->persist($subject);
+            $output->writeln("Processing subject {$obj->item}...");
+            $subject = $this->subjectRepository->findOneBy(['item' => $obj->item]);
+            if (!$subject) {
+                $subject = new Subject();
+                $this->entityManager->persist($subject);
+            }
             $subject->setItem($obj->item);
-
-//            $tok = strtok($obj->item, " ");
-//            $subject_string = $tok;
-//            $tok = strtok(" ");
-//            while ($tok !== false) {
-//                $subject_string .= ("%20" . $tok);
-//                $tok = strtok(" ");
-//            }
-//            $url = "https://plan.zut.edu.pl/schedule_student.php?subject=$subject_string&start=2024-11-25&end=2024-12-02";
-//            $response = file_get_contents($url);
-//            $json2 = json_decode($response);
-//            foreach($json2 as $obj2){
-//                $item = json_encode($obj2);
-//                var_dump($item);
-//                $lesson = new Lesson();
-//                $lesson->setItem($item);
-//                $subject->addLesson($lesson);
-//            }
+            $cnt++;
+            if(!($cnt % 100)) {
+                $this->entityManager->flush();
+            }
         }
+        $this->entityManager->flush();
         return Command::SUCCESS;
     }
 }

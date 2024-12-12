@@ -40,6 +40,9 @@ class Lesson
     #[ORM\Column]
     private array $json = [];
 
+    #[ORM\Column]
+    private ?bool $is_updated = null;
+
     public function __construct()
     {
         $this->subject_id = new ArrayCollection();
@@ -144,6 +147,18 @@ class Lesson
     public function setJson(array $json): static
     {
         $this->json = $json;
+
+        return $this;
+    }
+
+    public function isUpdated(): ?bool
+    {
+        return $this->is_updated;
+    }
+
+    public function setUpdated(bool $is_updated): static
+    {
+        $this->is_updated = $is_updated;
 
         return $this;
     }

@@ -16,6 +16,40 @@ class LessonRepository extends ServiceEntityRepository
         parent::__construct($registry, Lesson::class);
     }
 
+    public function deleteAllNotUpdated(): void
+    {
+        $entityManager = $this->getEntityManager();
+
+//        $query = $entityManager->createQuery(
+//            'DELETE
+//            FROM lesson
+//            WHERE is_updated == false'
+//        );
+//        $query->execute();
+
+        $qb = $this->createQueryBuilder('lesson')
+            ->delete()
+            ->where('lesson.is_updated = false');
+        $query = $qb->getQuery();
+        $query->execute();
+
+        $qb = $this->createQueryBuilder('lesson')
+            ->update()
+            ->set('lesson.is_updated', 0)
+            ->where('lesson.is_updated = true');
+        $query = $qb->getQuery();
+        $query->execute();
+
+//        $query = $entityManager->createQuery(
+//            'UPDATE
+//            lesson
+//            SET is_updated = false
+//            WHERE true'
+//        );
+//        $query->execute();
+        return;
+    }
+
     //    /**
     //     * @return Lesson[] Returns an array of Lesson objects
     //     */
